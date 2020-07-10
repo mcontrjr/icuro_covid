@@ -52,7 +52,7 @@ def create_dictionary(names_file):
 
 mypath = getcwd()
 
-names_file = '/Users/mcontr/repos/icuro_local/data_for_colab/obj.names'
+names_file = '/Users/mcontr/repos/icuro_covid/data_for_colab/obj.names'
 class_dict = create_dictionary(names_file)
 # print(class_dict)
 for classes in class_dict:

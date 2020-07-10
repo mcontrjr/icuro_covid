@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 
 print(current_dir)
 
-current_dir = '/Users/mcontr/repos/icuro/train/data'
+current_dir = '/Users/mcontr/repos/icuro_covid/train/data'
 
 # Directory where the data will reside, relative to 'darknet.exe'
 #path_data = './NFPAdataset/'

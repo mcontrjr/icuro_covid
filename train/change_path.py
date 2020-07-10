@@ -3,8 +3,8 @@
 train = "train.txt"
 test = "test.txt"
 
-current_path = "/Users/mcontr/repos/icuro/train/"
-store_path = "/Users/mcontr/repos/icuro/data_for_colab/"
+current_path = "/Users/mcontr/repos/icuro_covid/train/"
+store_path = "/Users/mcontr/repos/icuro_covid/data_for_colab/"
 
 new_dir = "/content/darknet/data_for_colab/data/"
 
