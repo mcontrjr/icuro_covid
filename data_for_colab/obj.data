@@ -1,5 +1,5 @@
-classes= 2
-train = /content/darknet/data_for_colab/train.txt  
-valid = /content/darknet/data_for_colab/test.txt  
-names = /content/darknet/data_for_colab/obj.names  
+classes= 5
+train = /home/cronus/repos/darknet/data_for_colab/train.txt  
+valid = /home/cronus/repos/darknet/data_for_colab/test.txt  
+names = /home/cronus/repos/darknet/data_for_colab/obj.names  
 backup = backup/
