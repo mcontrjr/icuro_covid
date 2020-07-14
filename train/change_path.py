@@ -3,10 +3,15 @@
 train = "train.txt"
 test = "test.txt"
 
+## Local Computer
 current_path = "/Users/mcontr/repos/icuro_covid/train/"
 store_path = "/Users/mcontr/repos/icuro_covid/data_for_colab/"
+# new_dir = "/content/darknet/data_for_colab/data/"
 
-new_dir = "/content/darknet/data_for_colab/data/"
+## G-Force Computer
+# current_path = "/home/cronus/repos/icuro_covid/train/"
+# store_path = "/home/cronus/repos/darknet/data_for_colab/"
+new_dir = "/home/cronus/repos/darknet/data_for_colab/data/"
 
 
 # copy train.txt

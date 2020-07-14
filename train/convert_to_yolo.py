@@ -24,10 +24,12 @@ def convert_label(width, height, label):
 	label = label.split(" ")
 	length = len(label)-1
 	left, top, right, bottom = label[length-3:]
-	w = (float(right)-float(left))/width
-	h = (float(bottom) - float(top))/height
-	x = (float(left) + w/2)/width
-	y = (float(top) + h/2)/height
+	box_w = (float(right)-float(left))
+	box_h = (float(bottom)-float(top))
+	w = (box_w)/width
+	h = (box_h)/height
+	x = (float(left) + box_w/2)/width
+	y = (float(top) + box_h/2)/height
 	return x,y,w,h
 
 ## description: write new YOLO label to to imgID.txt
