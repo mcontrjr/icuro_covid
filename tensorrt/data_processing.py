@@ -83,7 +83,7 @@ class PreprocessYOLO(object):
         """
         self.yolo_input_resolution = yolo_input_resolution
 
-    def process(self, input_image_path):
+    def process(self, img):
         """Load an image from the specified input path,
         and return it together with a pre-processed version required for feeding it into a
         YOLOv3 network.
@@ -91,11 +91,11 @@ class PreprocessYOLO(object):
         Keyword arguments:
         input_image_path -- string path of the image to be loaded
         """
-        image_raw, image_resized = self._load_and_resize(input_image_path)
+        image_raw, image_resized = self._load_and_resize(img)
         image_preprocessed = self._shuffle_and_normalize(image_resized)
         return image_raw, image_preprocessed
 
-    def _load_and_resize(self, input_image_path):
+    def _load_and_resize(self, img):
         """Load an image from the specified path and resize it to the input resolution.
         Return the input image before resizing as a PIL Image (required for visualization),
         and the resized image as a NumPy float array.
@@ -104,7 +104,8 @@ class PreprocessYOLO(object):
         input_image_path -- string path of the image to be loaded
         """
 
-        image_raw = Image.open(input_image_path)
+        # image_raw = Image.open(input_image_path)
+        image_raw = Image.fromarray(img, 'RGB')
         # Expecting yolo_input_resolution in (height, width) format, adjusting to PIL
         # convention (width, height) in PIL:
         new_resolution = (

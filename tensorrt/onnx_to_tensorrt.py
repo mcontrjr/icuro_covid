@@ -172,10 +172,9 @@ def main():
 
     postprocessor_args = {"yolo_masks": [(6, 7, 8), (3, 4, 5), (0, 1, 2)],                    # A list of 3 three-dimensional tuples for the YOLO masks
                           "yolo_anchors": [(1.16,2.48), (2.71,4.46), (3.40,9.37), (6.05,12.82), (7.17,6.03),  
-# A list of 9 two-dimensional tuples for the YOLO anchors
-                                           (9.47,9.79), (10.19,15.03), (14.78,10.34), (15.63,16.11)],
-                          "obj_threshold": 0.6,                                             # Threshold for object coverage, float value between 0 and 1
-                          "nms_threshold": 0.5,                                               # Threshold for non-max suppression algorithm, float value between 0 and 1
+                                           (9.47,9.79), (10.19,15.03), (14.78,10.34), (15.63,16.11)], 
+                          "obj_threshold": 0.6,  # Threshold for object coverage, float value between 0 and 1
+                          "nms_threshold": 0.5,  # Threshold for non-max suppression algorithm, float value between 0 and 1
                           "yolo_input_resolution": input_resolution_yolov3_HW}
 
     postprocessor = PostprocessYOLO(**postprocessor_args)

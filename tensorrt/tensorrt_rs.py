@@ -20,7 +20,7 @@ import pyrealsense2 as rs
 # Configure depth and color streams
 pipeline = rs.pipeline()
 config = rs.config()
-config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+config.enable_stream(rs.stream.color, 640, 480, rs.format.rgb8, 30)
 # Start streaming
 pipeline.start(config)
 
@@ -113,16 +113,30 @@ def main():
     # Do inference with TensorRT
     trt_outputs = []
     with get_engine(onnx_file_path, engine_file_path) as engine, engine.create_execution_context() as context:
-        inputs, outputs, bindings, stream = common.allocate_buffers(engine)
-        # Do inference
-        print('Running inference on image {}...'.format(input_image_path))
-        # Set host input to the image. The common.do_inference function will copy the input to the GPU before executing.
-        inputs[0].host = image
-        trt_outputs = common.do_inference(context, bindings=bindings, inputs=inputs, outputs=outputs, stream=stream)
+        while True:
+	        inputs, outputs, bindings, stream = common.allocate_buffers(engine)
+	        # Get image from Realsense camera
+	        frames = pipeline.wait_for_frames()
+        	# depth_frame = frames.get_depth_frame()
+        	color_frame = frames.get_color_frame()
+        	if not depth_frame or not color_frame:
+            	continue
+	        image_raw, image = preprocessor.process(color_frame)
+	        # Store the shape of the original input image in WH format, we will need it for later
+    		shape_orig_WH = image_raw.size
+	        
+	        # Set host input to the image. The common.do_inference function will copy the input to the GPU before executing.
+	        inputs[0].host = image
+	        trt_outputs = common.do_inference(context, bindings=bindings, inputs=inputs, outputs=outputs, stream=stream)
 
-	    # Before doing post-processing, we need to reshape the outputs as the common.do_inference will give us flat arrays.
-	    trt_outputs = [output.reshape(shape) for output, shape in zip(trt_outputs, output_shapes)]
+		    # Before doing post-processing, we need to reshape the outputs as the common.do_inference will give us flat arrays.
+		    trt_outputs = [output.reshape(shape) for output, shape in zip(trt_outputs, output_shapes)]
 
+		    # Run the post-processing algorithms on the TensorRT outputs and get the bounding box details of detected objects
+    		boxes, classes, scores = postprocessor.process(trt_outputs, (shape_orig_WH))
+		    # Draw the bounding boxes onto the original input image and save it as a PNG file
+		    obj_detected_img = draw_bboxes(image_raw, boxes, scores, classes, ALL_CATEGORIES)
+		    obj_detected_img.show()
 
 if __name__ == '__main__':
     main()
