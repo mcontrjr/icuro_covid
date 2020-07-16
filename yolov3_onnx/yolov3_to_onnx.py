@@ -797,7 +797,7 @@ def main():
     cfg_file_path = '%s.cfg' % args.model
     if not os.path.isfile(cfg_file_path):
         raise SystemExit('ERROR: file (%s) not found!' % cfg_file_path)
-    weights_file_path = 'yolov3_final.weights' % args.model
+    weights_file_path = 'yolov3_final.weights'
     if not os.path.isfile(weights_file_path):
         raise SystemExit('ERROR: file (%s) not found!' % weights_file_path)
     output_file_path = '%s.onnx' % args.model
@@ -809,7 +809,8 @@ def main():
             raise SystemExit('ERROR: bad yolo_dim (%s)!' % yolo_dim)
         w, h = int(dim_split[0]), int(dim_split[1])
     else:
-        h = w = int(yolo_dim)
+        # print(yolo_dim)
+        h = w = int(608) # -mc size for the model
     if h % 32 != 0 or w % 32 != 0:
         raise SystemExit('ERROR: bad yolo_dim (%s)!' % yolo_dim)
 

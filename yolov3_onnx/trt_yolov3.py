@@ -19,6 +19,7 @@ from utils.display import open_window, set_display, show_fps
 from utils.visualization import BBoxVisualization
 
 import pyrealsense2 as rs
+import numpy as np
 
 # Configure depth and color streams
 pipeline = rs.pipeline()
@@ -66,8 +67,10 @@ def loop_and_detect(pipeline, trt_yolov3, conf_th, vis):
         frames = pipeline.wait_for_frames()
         # depth_frame = frames.get_depth_frame()
         img = frames.get_color_frame()
+        img = np.asanyarray(img.get_data())
         if img is not None:
             boxes, confs, clss = trt_yolov3.detect(img, conf_th)
+            # print(boxes)
             img = vis.draw_bboxes(img, boxes, confs, clss)
             img = show_fps(img, fps)
             cv2.imshow(WINDOW_NAME, img)
@@ -88,8 +91,8 @@ def main():
     args = parse_args()
     if args.category_num <= 0:
         raise SystemExit('ERROR: bad category_num (%d)!' % args.category_num)
-    if not os.path.isfile('yolov3_onnx/%s.trt' % args.model):
-        raise SystemExit('ERROR: file (yolov3_onnx/%s.trt) not found!' % args.model)
+    if not os.path.isfile('%s.trt' % args.model):
+        raise SystemExit('ERROR: file (%s.trt) not found!' % args.model)
 
     # cam = Camera(args)
     # cam.open()
