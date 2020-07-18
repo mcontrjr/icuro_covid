@@ -105,7 +105,7 @@ def kmeans(X,centroids,eps,anchor_file):
 
 def main(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument('-filelist', default = '/Users/mcontr/repos/icuro_covid/train/train.txt',
+    parser.add_argument('-filelist', default = '/Users/mcontr/repos/icuro_covid/data_to_train/train.txt',
                         help='path to filelist\n' )
     parser.add_argument('-output_dir', default = '/Users/mcontr/repos/icuro_covid/train/anchors', type = str,
                         help='Output anchor directory\n' )

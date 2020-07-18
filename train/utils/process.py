@@ -5,7 +5,7 @@ def process():
     # Current directory
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
-    # print("Current Directory: " + current_dir)
+#    print("Current Directory: " + current_dir)
 
     ##      Directory to write to    ##
     write_dir ="/Users/mcontr/repos/icuro_covid/data_to_train" # Local Computer
