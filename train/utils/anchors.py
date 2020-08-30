@@ -161,5 +161,19 @@ def main(argv):
         kmeans(annotation_dims,centroids,eps,anchor_file)
         print('centroids.shape', centroids.shape)
 
+<<<<<<< HEAD
 if __name__=="__main__":
     main(sys.argv)
+=======
+def run():
+    yolo_anchors = 9
+    tiny_yolo_anchors = 6
+
+    # generate(sys.argv,yolo_anchors) # generate 9 number clusters for YOLOv3
+    generate(sys.argv,tiny_yolo_anchors) # generate 6 number clusters for tiny-YOLOv3
+
+
+if __name__ == '__main__':
+    run()
+
+>>>>>>> 8d25be06... data folder is now in darknet. this repo has preprocess that looks through the names and generates AB
